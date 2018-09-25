@@ -58,6 +58,7 @@ setTimeout(() => {
   })
 }, 10000);
 ```
+// 会隔10s再打印
 
 以及理解如下代码的执行顺序 ([出处](https://zhuanlan.zhihu.com/p/25407758)):
 
@@ -76,6 +77,9 @@ new Promise(function executor(resolve) {
 });
 console.log(5);
 ```
+（2 3 5 4 1）
+(1). Promise 的执行器会立即执行，早于源代码中在其之后的任何代码
+(2). Promise 的then会生成nextTick事件(当前事件执行完后立即执行), nextTick的优先级高于setTimeout
 
 如果你不了解这些问题, 可以自己在本地尝试研究一下打印的结果. 这里希望你掌握的是 Promise 的状态转换, 包括异步与 Promise 的关系, 以及 Promise 如何帮助你处理异步, 如果你研究过 Promise 的实现那就更好了.
 
