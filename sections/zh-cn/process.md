@@ -64,11 +64,39 @@
 
 `process.nextTick` 并不属于 Event loop 中的某一个阶段, 而是在 Event loop 的每一个阶段结束后, 直接执行 `nextTickQueue` 中插入的 "Tick", 并且直到整个 Queue 处理完. 所以面试时又有可以问的问题了, 递归调用 process.nextTick 会怎么样? (doge
 
+--------------------------------
+
+```let index = 0;
+function nextTick () {
+    if (index > 1000) return;
+    index++;
+    console.log('nextTick ' + index);
+    process.nextTick(nextTick);
+}
+nextTick();
+
+输出： 
+nextTick 1
+nextTick 2
+nextTick 3
+.....
+nextTick 999
+nextTick 1000
+nextTick 1001
+
+-------------------------------
+
+
 ```javascript
 function test() { 
   process.nextTick(() => test());
 }
 ```
+
+---------------------------------
+
+---------------------------------
+
 
 这种情况与以下情况, 有什么区别? 为什么?
 
@@ -77,6 +105,13 @@ function test() {
   setTimeout(() => test(), 0);
 }
 ```
+
+---------------------------------
+
+会在Event loop 执行下一个循环之前或下一个循环的timer阶段执行
+
+---------------------------------
+
 
 ### 配置
 
