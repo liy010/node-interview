@@ -73,7 +73,7 @@ function nextTick () {
     console.log('nextTick ' + index);
     process.nextTick(nextTick);
 }
-nextTick();
+nextTick();```
 
 输出： 
 nextTick 1
