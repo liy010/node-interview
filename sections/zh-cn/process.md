@@ -66,14 +66,16 @@
 
 --------------------------------
 
-```let index = 0;
+```
+let index = 0;
 function nextTick () {
     if (index > 1000) return;
     index++;
     console.log('nextTick ' + index);
     process.nextTick(nextTick);
 }
-nextTick();```
+nextTick();
+```
 
 输出： 
 nextTick 1
@@ -88,10 +90,12 @@ nextTick 1001
 -------------------------------
 
 
-```javascript
+```
+javascript
 function test() { 
   process.nextTick(() => test());
-}```
+}
+```
 
 ---------------------------------
 
