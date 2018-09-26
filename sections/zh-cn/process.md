@@ -91,8 +91,7 @@ nextTick 1001
 ```javascript
 function test() { 
   process.nextTick(() => test());
-}
-```
+}```
 
 ---------------------------------
 
